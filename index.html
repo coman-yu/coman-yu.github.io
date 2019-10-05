@@ -161,6 +161,227 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-mybatis的配置和注意事项" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/03/mybatis的配置和注意事项/">常用集合的用法和区别</a>
+    </h1>
+  
+
+        
+        
+
+
+<a href="/2019/10/03/mybatis的配置和注意事项/" class="archive-article-date">
+  	<time datetime="2019-10-03T02:48:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="mybatis中一些注意要点"><a href="#mybatis中一些注意要点" class="headerlink" title="mybatis中一些注意要点"></a>mybatis中一些注意要点</h2><ol>
+<li><p>创建mybatis工厂可以采用静态工厂生成，这调用过程生成一次</p>
+<p><img src="C:%5CUsers%5Cniu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570262680753.png" alt="1570262680753"></p>
+</li>
+<li><p>关于#{}和${}</p>
+<p>#{}表示一个占位符号，#{}接收输入参数，类型可以是简单类型，pojo、hashmap。</p>
+<p>如果接收简单类型，#{}中可以写成value或其它名称。</p>
+<p>#{}接收pojo对象值，通过OGNL读取对象中的属性值，通过属性.属性.属性…的方式获取对象属性值。</p>
+</li>
+</ol>
+<p>   ${}表示一个拼接符号，会引用sql注入，所以不建议使用${}。</p>
+<p>   ${}接收输入参数，类型可以是简单类型，pojo、hashmap。</p>
+<p>   如果接收简单类型，${}中只能写成value。</p>
+<p>   ${}接收pojo对象值，通过OGNL读取对象中的属性值，通过属性.属性.属性…的方式获取对象属性值。</p>
+<ol start="3">
+<li><p>selectOne和selectList</p>
+<p>​    selectOne表示查询出一条记录进行映射。如果使用selectOne可以实现使用selectList也可以实现（list中只有一个对象）。</p>
+</li>
+</ol>
+<p>   ​    selectList表示查询出一个列表（多条记录）进行映射。如果使用selectList查询多条记录，不能使用    selectOne。</p>
+<p>   ​    如果使用selectOne报错：</p>
+<p>   ​    org.apache.ibatis.exceptions.TooManyResultsException: Expected one result (or null) to be         returned by selectOne(), but found: 4</p>
+<h2 id="mybatis-和hibernate的本质区别和应用"><a href="#mybatis-和hibernate的本质区别和应用" class="headerlink" title="mybatis 和hibernate的本质区别和应用"></a>mybatis 和hibernate的本质区别和应用</h2><p>   hibernate：是一个标准ORM框架（对象关系映射）。入门门槛较高的，不需要程序写sql，sql语句自动生成了。</p>
+<p>   对sql语句进行优化、修改比较困难的。</p>
+<p>   应用场景：</p>
+<p>   ​    适用与需求变化不多的中小型项目，比如：后台管理系统，erp、orm、oa。。</p>
+<p>   mybatis：专注是sql本身，需要程序员自己编写sql语句，sql修改、优化比较方便。mybatis是一个不完全 的ORM框架，虽然程序员自己写sql，mybatis 也可以实现映射（输入映射、输出映射）。</p>
+<p>   应用场景：</p>
+<p>   ​    适用与需求变化较多的项目，比如：互联网项目。</p>
+<p>   企业进行技术选型，以低成本 高回报作为技术选型的原则，根据项目组的技术力量进行选择。</p>
+<h2 id="原始dao开发-需要写dao接口和dao实现"><a href="#原始dao开发-需要写dao接口和dao实现" class="headerlink" title="原始dao开发(需要写dao接口和dao实现)"></a>原始dao开发(需要写dao接口和dao实现)</h2><p>思路：程序员需要写dao接口个dao实现类</p>
+<p><strong>总结原始dao开发问题</strong>：</p>
+<ol>
+<li>dao接口实现类方法中存在大量模板方法,若能将这些代码提取出来，将减少程序员的负担</li>
+</ol>
+<ol start="2">
+<li>调用sqlsession方法是将statement的id硬编码</li>
+</ol>
+<p>   3.调用sqlsession方法时传入的变量，由于sqlsession方法使用泛型，即使变量类型传入错误，在编译阶        段也不报错，不利于程序员开发。</p>
+<h2 id="Mapper代理方法"><a href="#Mapper代理方法" class="headerlink" title="Mapper代理方法"></a>Mapper代理方法</h2><h3 id="1-思路-mapper代理开发规范"><a href="#1-思路-mapper代理开发规范" class="headerlink" title="1.思路(mapper代理开发规范)"></a>1.思路(mapper代理开发规范)</h3><p> 编写mapper.xml映射文件</p>
+<p>编写mapper接口需要遵循一些开发规范，mybatis可以自动生成mapper接口实现代理对象</p>
+<p>开发规范：</p>
+<p>1 在mapper.xml中namespace等于mapper接口地址</p>
+<p><img src="C:%5CUsers%5Cniu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570265452735.png" alt="1570265452735"></p>
+<p>2 mapper.java接口中的方法名和mapper.xml中statemet的id一致</p>
+<p>3.mapper.java接口中方法的输入参数类型和mapper.xm中statement的parameterType指定类型一致</p>
+<p>4、mapper.java接口中的方法返回值类型和mapper.xml中statement的resultType指定的类型一致。</p>
+<p>总结：</p>
+<p>以上开发规范主要是对下边的代码进行统一生成：</p>
+<p>User user = sqlSession.selectOne(“test.findUserById”, id);</p>
+<p>sqlSession.insert(“test.insertUser”, user);</p>
+<p>。。。。</p>
+<h2 id="mapper接口方法参数只有一个是否影响开发"><a href="#mapper接口方法参数只有一个是否影响开发" class="headerlink" title="mapper接口方法参数只有一个是否影响开发?"></a>mapper接口方法参数只有一个是否影响开发?</h2><p>mapper接口方法参数只能有一个，系统是否不利于扩展维护。</p>
+<p><strong>系统 框架中，dao层的代码是被业务层公用的。</strong></p>
+<p><strong>即使mapper接口只有一个参数，可以使用包装类型的pojo满足不同的业务方法的需求。</strong></p>
+<p>注意：持久层方法的参数可以包装类型、map。。。，service方法中建议不要使用包装类型（不利于业务层的可扩展）。</p>
+<h2 id="SqlMapConfig-xml"><a href="#SqlMapConfig-xml" class="headerlink" title="SqlMapConfig.xml"></a>SqlMapConfig.xml</h2><p>mybatis的全局配置文件SqlMapConfig.xml，配置内容如下：</p>
+<p>properties（属性）</p>
+<p>settings（全局配置参数）</p>
+<p>typeAliases（类型别名）</p>
+<p>typeHandlers（类型处理器）</p>
+<p>objectFactory（对象工厂）</p>
+<p>plugins（插件）</p>
+<p>environments（环境集合属性对象）</p>
+<p>environment（环境子属性对象）</p>
+<p>transactionManager（事务管理）</p>
+<p>dataSource（数据源）</p>
+<p>mappers（映射器）</p>
+<h2 id="1-properties属性"><a href="#1-properties属性" class="headerlink" title="1  properties属性"></a><strong>1</strong>  properties属性</h2><p>需求：</p>
+<p>将数据库连接参数单独配置在db.properties中，只需要在SqlMapConfig.xml中加载db.properties的属性值。</p>
+<p>在SqlMapConfig.xml中就不需要对数据库连接参数硬编码。</p>
+<p>将数据库连接参数只配置在db.properties中，原因：方便对参数进行统一管理，其它xml可以引用该db.properties。</p>
+<p>properties特性：</p>
+<p>注意： MyBatis 将按照下面的顺序来加载属性：</p>
+<p>step 1:在 properties 元素体内定义的属性首先被读取。 </p>
+<p>step 2:然后会读取properties 元素中resource或 url 加载的属性，它会覆盖已读取的同名属性。 </p>
+<p>step 3:最后读取parameterType传递的属性，它会覆盖已读取的同名属性。</p>
+<p>建议：</p>
+<p>不要在properties元素体内添加任何属性值，只将属性值定义在properties文件中。</p>
+<p>在properties文件中定义属性名要有一定的特殊性，如：XXXXX.XXXXX.XXXX</p>
+<p><strong>typeAliases（别名）</strong></p>
+<p>在mapper.xml中，定义很多的statement，statement需要parameterType指定输入参数的类型、需要resultType指定输出结果的映射类型。</p>
+<p>如果在指定类型时输入类型全路径，不方便进行开发，可以针对parameterType或resultType指定的类型定义一些别名，在mapper.xml中通过别名定义，方便开发。</p>
+<h4 id="1-单个别名定义"><a href="#1-单个别名定义" class="headerlink" title="1  单个别名定义"></a><strong>1</strong>  <strong>单个别名定义</strong></h4><p><img src="C:%5CUsers%5Cniu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570266064484.png" alt="1570266064484"></p>
+<p><strong>2</strong>  <strong>批量定义别名（常用）</strong></p>
+<p><img src="C:%5CUsers%5Cniu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570266118682.png" alt="1570266118682"></p>
+<p><strong>3</strong> <strong>通过mapper接口加载单个mapper</strong></p>
+<p><img src="C:%5CUsers%5Cniu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570266776245.png" alt="1570266776245"></p>
+<p>按照上边的规范，将mapper.java和mapper.xml放在一个目录 ，且同名</p>
+<p><img src="C:%5CUsers%5Cniu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570266798306.png" alt="1570266798306"></p>
+<p><strong>4</strong> <strong>批量加载mapper(推荐使用)</strong></p>
+<p><img src="C:%5CUsers%5Cniu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570266905695.png" alt="1570266905695"></p>
+<h2 id="输入映射"><a href="#输入映射" class="headerlink" title="输入映射"></a>输入映射</h2><p>通过parameterType指定输入参数的类型，类型可以是简单类型、hashmap、pojo的包装类型</p>
+<p>1.<strong>传递pojo的包装对象</strong></p>
+<p>​    完成用户信息的综合查询，需要传入查询条件很复杂（可能包括用户信息、其它信息，比如商品、订单的）</p>
+<p>2.<strong>定义包装类型的pojo</strong></p>
+<p>针对上边需求，建议使用自定义的包装类型的pojo。</p>
+<p>在包装类型的pojo中将复杂的查询条件包装进去。</p>
+<p>3.<strong>在mapper.xml中进行映射</strong></p>
+<h2 id="输出映射"><a href="#输出映射" class="headerlink" title="输出映射"></a>输出映射</h2><p><strong>resultType</strong></p>
+<p><strong>使用resultType进行输出映射，只有查询出来的列名和pojo中的属性名一致，该列才可以映射成功。</strong></p>
+<p>如果查询出来的列名和pojo中的属性名全部不一致，没有创建pojo对象。</p>
+<p>只要查询出来的列名和pojo中的属性有一个一致，就会创建pojo对象。</p>
+<ol>
+<li><p><strong>输出简单类型</strong></p>
+<p>输出结果集只有一行且一列可使用</p>
+</li>
+<li><p><strong>输出pojo对象或列表</strong></p>
+<p>不管是输出的pojo单个对象还是一个列表（list中包括pojo），在mapper.xml中resultType指定的类型是一样的。</p>
+<p>在mapper.java指定的方法返回值类型不一样：</p>
+<p>生成的动态代理对象中是根据mapper方法的返回值类型确定是调用selectOne(返回单个对象调用)还是selectList （返回集合对象调用 ）.</p>
+</li>
+</ol>
+<p><strong>resultMap</strong></p>
+<p>使用方法：如果查询出来的列名和pojo的属性名不一致，通过定义一个resultMap对列名和pojo属性名之间作一个映射关系。</p>
+<p>1 定义resultMap</p>
+<p>2 使用resultMap作为statement的输出映射类型</p>
+<p><strong>小结</strong></p>
+<p>使用resultType进行输出映射，只有查询出来的列名和pojo中的属性名一致，该列才可以映射成功。</p>
+<p>如果查询出来的列名和pojo的属性名不一致，通过定义一个resultMap对列名和pojo属性名之间作一个映射关系。</p>
+<h2 id="动态sql"><a href="#动态sql" class="headerlink" title="动态sql"></a>动态sql</h2><p><strong>什么是动态sql？</strong></p>
+<p>mybatis核心 对sql语句进行灵活操作，通过表达式进行判断，对sql进行灵活拼接、组装。</p>
+<p><strong>需求</strong></p>
+<p>用户信息综合查询列表和用户信息查询列表总数这两个statement的定义使用动态sql。</p>
+<p>对查询条件进行判断，如果输入参数不为空才进行查询条件拼接</p>
+<p><strong>相关配置</strong></p>
+<p><img src="C:%5CUsers%5Cniu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570269441898.png" alt="1570269441898"></p>
+<p><strong>sql片段</strong></p>
+<p>1.<strong>需求</strong></p>
+<p>将上边实现的动态sql判断代码块抽取出来，组成一个sql片段。其它的statement中就可以引用sql片段。</p>
+<p>方便程序员进行开发。</p>
+<p>2.<strong>定义sql片段</strong></p>
+<p><img src="C:%5CUsers%5Cniu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570269609972.png" alt="1570269609972"></p>
+<p>3.<strong>引用sql片段</strong></p>
+<p><img src="C:%5CUsers%5Cniu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570269688756.png" alt="1570269688756"></p>
+<p><img src="C:%5CUsers%5Cniu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570269709604.png" alt="1570269709604"></p>
+<h2 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h2><p>向sql传递数组或List，mybatis使用foreach解析</p>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a><strong>需求</strong></h3><p>在用户查询列表和查询总数的statement中增加多个id输入查询。</p>
+<p>sql语句如下：</p>
+<p>两种方法：</p>
+<p>SELECT * FROM USER WHERE id=1 OR id=10 OR id=16</p>
+<p>SELECT * FROM USER WHERE id IN(1,10,16)</p>
+<p> <img src="C:%5CUsers%5Cniu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570270169918.png" alt="1570270169918"></p>
+<p>另一个sql实现</p>
+<p><img src="C:%5CUsers%5Cniu%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570270474738.png" alt="1570270474738"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/03/mybatis的配置和注意事项/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-first-blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -414,6 +635,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mybatis</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
