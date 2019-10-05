@@ -5,35 +5,35 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="dns-prefetch" href="http://yoursite.com">
+  <link rel="dns-prefetch" href="http://coman-yu.github.io">
   <title>常用集合的用法和区别 | Coman&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="mybatis中一些注意要点 创建mybatis工厂可以采用静态工厂生成，这调用过程生成一次   关于#{}和${} #{}表示一个占位符号，#{}接收输入参数，类型可以是简单类型，pojo、hashmap。 如果接收简单类型，#{}中可以写成value或其它名称。 #{}接收pojo对象值，通过OGNL读取对象中的属性值，通过属性.属性.属性…的方式获取对象属性值。      ${}表示一个拼接">
+  <meta name="description" content="mybatis中一些注意要点 创建mybatis工厂可以采用静态工厂生成，这调用过程生成一次">
 <meta name="keywords" content="mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用集合的用法和区别">
-<meta property="og:url" content="http://yoursite.com/2019/10/03/mybatis的配置和注意事项/index.html">
+<meta property="og:url" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/index.html">
 <meta property="og:site_name" content="Coman&#39;s blog">
-<meta property="og:description" content="mybatis中一些注意要点 创建mybatis工厂可以采用静态工厂生成，这调用过程生成一次   关于#{}和${} #{}表示一个占位符号，#{}接收输入参数，类型可以是简单类型，pojo、hashmap。 如果接收简单类型，#{}中可以写成value或其它名称。 #{}接收pojo对象值，通过OGNL读取对象中的属性值，通过属性.属性.属性…的方式获取对象属性值。      ${}表示一个拼接">
+<meta property="og:description" content="mybatis中一些注意要点 创建mybatis工厂可以采用静态工厂生成，这调用过程生成一次">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/.com//1.png">
-<meta property="og:image" content="http://yoursite.com/.com//22.png">
-<meta property="og:image" content="http://yoursite.com/.com//2.png">
-<meta property="og:image" content="http://yoursite.com/.com//3.png">
-<meta property="og:image" content="http://yoursite.com/.com//45.png">
-<meta property="og:image" content="http://yoursite.com/.com//4.png">
-<meta property="og:image" content="http://yoursite.com/.com//5.png">
-<meta property="og:image" content="http://yoursite.com/.com//6.png">
-<meta property="og:image" content="http://yoursite.com/.com//7.png">
-<meta property="og:image" content="http://yoursite.com/.com//8.png">
-<meta property="og:image" content="http://yoursite.com/.com//9.png">
-<meta property="og:image" content="http://yoursite.com/.com//18.png">
-<meta property="og:image" content="http://yoursite.com/.com//10.png">
-<meta property="og:updated_time" content="2019-10-05T10:57:09.035Z">
+<meta property="og:image" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/1.png">
+<meta property="og:image" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/22.png">
+<meta property="og:image" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/2.png">
+<meta property="og:image" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/3.png">
+<meta property="og:image" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/45.png">
+<meta property="og:image" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/4.png">
+<meta property="og:image" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/5.png">
+<meta property="og:image" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/6.png">
+<meta property="og:image" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/7.png">
+<meta property="og:image" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/8.png">
+<meta property="og:image" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/9.png">
+<meta property="og:image" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/18.png">
+<meta property="og:image" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/10.png">
+<meta property="og:updated_time" content="2019-10-05T11:06:15.398Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用集合的用法和区别">
-<meta name="twitter:description" content="mybatis中一些注意要点 创建mybatis工厂可以采用静态工厂生成，这调用过程生成一次   关于#{}和${} #{}表示一个占位符号，#{}接收输入参数，类型可以是简单类型，pojo、hashmap。 如果接收简单类型，#{}中可以写成value或其它名称。 #{}接收pojo对象值，通过OGNL读取对象中的属性值，通过属性.属性.属性…的方式获取对象属性值。      ${}表示一个拼接">
-<meta name="twitter:image" content="http://yoursite.com/.com//1.png">
+<meta name="twitter:description" content="mybatis中一些注意要点 创建mybatis工厂可以采用静态工厂生成，这调用过程生成一次">
+<meta name="twitter:image" content="http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Coman&#39;s blog" type="application/atom+xml">
   
@@ -208,7 +208,8 @@
       
         <h2 id="mybatis中一些注意要点"><a href="#mybatis中一些注意要点" class="headerlink" title="mybatis中一些注意要点"></a>mybatis中一些注意要点</h2><ol>
 <li><p>创建mybatis工厂可以采用静态工厂生成，这调用过程生成一次</p>
-<p><img src="/.com//1.png" alt="1"></p>
+<p><img src="//coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/1.png" alt="1"></p>
+<a id="more"></a>
 </li>
 <li><p>关于#{}和${}</p>
 <p>#{}表示一个占位符号，#{}接收输入参数，类型可以是简单类型，pojo、hashmap。</p>
@@ -249,7 +250,7 @@
 <p>编写mapper接口需要遵循一些开发规范，mybatis可以自动生成mapper接口实现代理对象</p>
 <p>开发规范：</p>
 <p>1 在mapper.xml中namespace等于mapper接口地址</p>
-<p><img src="/.com//22.png" alt="2"></p>
+<p><img src="//coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/22.png" alt="2"></p>
 <p>2 mapper.java接口中的方法名和mapper.xml中statemet的id一致</p>
 <p>3.mapper.java接口中方法的输入参数类型和mapper.xm中statement的parameterType指定类型一致</p>
 <p>4、mapper.java接口中的方法返回值类型和mapper.xml中statement的resultType指定的类型一致。</p>
@@ -289,15 +290,15 @@
 <p><strong>typeAliases（别名）</strong></p>
 <p>在mapper.xml中，定义很多的statement，statement需要parameterType指定输入参数的类型、需要resultType指定输出结果的映射类型。</p>
 <p>如果在指定类型时输入类型全路径，不方便进行开发，可以针对parameterType或resultType指定的类型定义一些别名，在mapper.xml中通过别名定义，方便开发。</p>
-<h4 id="1-单个别名定义"><a href="#1-单个别名定义" class="headerlink" title="1  单个别名定义"></a><strong>1</strong>  <strong>单个别名定义</strong></h4><p><img src="/.com//2.png" alt="2"></p>
+<h4 id="1-单个别名定义"><a href="#1-单个别名定义" class="headerlink" title="1  单个别名定义"></a><strong>1</strong>  <strong>单个别名定义</strong></h4><p><img src="//coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/2.png" alt="2"></p>
 <p><strong>2</strong>  <strong>批量定义别名（常用）</strong></p>
-<p><img src="/.com//3.png" alt="1570266118682"></p>
+<p><img src="//coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/3.png" alt="1570266118682"></p>
 <p><strong>3</strong> <strong>通过mapper接口加载单个mapper</strong></p>
-<p><img src="/.com//45.png" alt="1570266776245"></p>
+<p><img src="//coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/45.png" alt="1570266776245"></p>
 <p>按照上边的规范，将mapper.java和mapper.xml放在一个目录 ，且同名</p>
-<p><img src="/.com//4.png" alt="1570266798306"></p>
+<p><img src="//coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/4.png" alt="1570266798306"></p>
 <p><strong>4</strong> <strong>批量加载mapper(推荐使用)</strong></p>
-<p><img src="/.com//5.png" alt="1570266905695"></p>
+<p><img src="//coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/5.png" alt="1570266905695"></p>
 <h2 id="输入映射"><a href="#输入映射" class="headerlink" title="输入映射"></a>输入映射</h2><p>通过parameterType指定输入参数的类型，类型可以是简单类型、hashmap、pojo的包装类型</p>
 <p>1.<strong>传递pojo的包装对象</strong></p>
 <p>​    完成用户信息的综合查询，需要传入查询条件很复杂（可能包括用户信息、其它信息，比如商品、订单的）</p>
@@ -332,25 +333,25 @@
 <p>用户信息综合查询列表和用户信息查询列表总数这两个statement的定义使用动态sql。</p>
 <p>对查询条件进行判断，如果输入参数不为空才进行查询条件拼接</p>
 <p><strong>相关配置</strong></p>
-<p><img src="/.com//6.png" alt="1570269441898"></p>
+<p><img src="//coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/6.png" alt="1570269441898"></p>
 <p><strong>sql片段</strong></p>
 <p>1.<strong>需求</strong></p>
 <p>将上边实现的动态sql判断代码块抽取出来，组成一个sql片段。其它的statement中就可以引用sql片段。</p>
 <p>方便程序员进行开发。</p>
 <p>2.<strong>定义sql片段</strong></p>
-<p><img src="/.com//7.png" alt="1570269609972"></p>
+<p><img src="//coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/7.png" alt="1570269609972"></p>
 <p>3.<strong>引用sql片段</strong></p>
-<p><img src="/.com//8.png" alt="1570269688756"></p>
-<p><img src="/.com//9.png" alt="1570269709604"></p>
+<p><img src="//coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/8.png" alt="1570269688756"></p>
+<p><img src="//coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/9.png" alt="1570269709604"></p>
 <h2 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h2><p>向sql传递数组或List，mybatis使用foreach解析</p>
 <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a><strong>需求</strong></h3><p>在用户查询列表和查询总数的statement中增加多个id输入查询。</p>
 <p>sql语句如下：</p>
 <p>两种方法：</p>
 <p>SELECT * FROM USER WHERE id=1 OR id=10 OR id=16</p>
 <p>SELECT * FROM USER WHERE id IN(1,10,16)</p>
-<p> <img src="/.com//18.png" alt="1570270169918"></p>
+<p> <img src="//coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/18.png" alt="1570270169918"></p>
 <p>另一个sql实现</p>
-<p><img src="/.com//10.png" alt="1570270474738"></p>
+<p><img src="//coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/10.png" alt="1570270474738"></p>
 
       
 
@@ -446,7 +447,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://coman-yu.github.io/2019/10/03/mybatis的配置和注意事项/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://coman-yu.github.io/ub.io/2019/10/03/mybatis的配置和注意事项/" alt="微信分享二维码">
     </div>
 </div>
 
